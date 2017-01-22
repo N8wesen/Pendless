@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Pendless</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta charset="utf-8"/>
+		
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="js/jqm/jquery.mobile-1.4.5.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+        <link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="vendor/chartist/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+		
+		<style>
+			/* Prevent FOUC */
+			body { opacity: 0; }
+            canvas { display:block; }
+		</style>
+
+	</head>
+	<body>
+
+	<!-- Center page for content. -->
+	<div data-role="page" class=".nd2-no-menu-swipe">
+    
+		<div data-role="panel" id="leftpanel" data-display="overlay" data-position-fixed="true" >
+
+				<div class='nd2-sidepanel-profile wow fadeInDown'>
+					<img class='profile-background' src="img/teco.jpg"/>
+					<br /><br />
+				</div>
+
+				<ul data-role="listview" data-inset="false">
+					<li data-role="list-divider">Color</li>
+				</ul>
+
+                <ul data-role="listview" data-inset="false" data-icon="false">
+                    <li><input type="color" id="colorPicker" value="#ff0000"></li>
+                </ul>
+                
+                <ul data-role="listview" data-inset="false">
+					<li data-role="list-divider">Brush size</li>
+				</ul>
+
+                <ul data-role="listview" data-inset="false" data-icon="false">
+                    <li><input type="range" id="brushSize" min="1" max="20" value="5"></li>
+                </ul>		
+			</div>
+                                
+		<!-- Header with open/close button for side panel. -->
+		<div data-role="header" data-position="fixed" class="wow fadeIn" data-tap-toggle="false">            
+            <a href="#leftpanel" data-role="button" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.2s'><i class="zmdi zmdi-palette"></i></a>
+            <h1 class="wow fadeIn" data-wow-delay='0.1s'>Pendless</h1>       
+            <!--a href="#bottomsheetblock" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='0.2s'><i class="zmdi zmdi-more-vert"></i></a-->  
+            <a href="#" id="clearButton"  data-role="button" class='ui-btn ui-btn-right wow fadeIn'><i class="zmdi zmdi-delete"></i></a> 
+        </div>
+        
+        <!-- Canvas -->
+		<div data-role="main" class="ui-content" id="canvasDiv" style="padding:0em"></div> 	
+
+        <!-- Footer -->        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div class="row center-xs">
+            <fieldset data-role="controlgroup" data-type="horizontal">                
+                <input type="radio" name="canvas-mode" class="canvas-mode" id="endless" value="endless" checked="checked">
+                <label for="endless" class="ui-btn ui-mini nd2-btn-icon-block">Endless Canvas</label>
+                
+                <input type="radio" name="canvas-mode" class="canvas-mode" id="fixed" value="fixed" >
+                <label for="fixed" class="ui-btn ui-mini nd2-btn-icon-block">Fixed canvas</label>
+            </fieldset>
+            </div>
+        </div>
+	</div>
+    
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jqm/jquery.mobile-1.4.5.js"></script>	
+	<script src="vendor/waves/waves.min.js"></script>
+	<script src="vendor/wow/wow.min.js"></script>
+	<script src="vendor/chartist/chartist.min.js"></script>
+	<script src="js/nativedroid2.js"></script>
+	<script src="nd2settings.js"></script>
+	<script src="js/index.js"></script>
+	<script type="text/javascript">        
+       
+        var userAgent = navigator.userAgent + '';
+        if (userAgent.indexOf('iPhone') > -1) {
+          document.write('<script src="js/lib/cordova-iphone.js"></sc' + 'ript>');
+          var mobile_system = 'iphone';
+        } else if (userAgent.indexOf('Android') > -1) {
+          document.write('<script src="js/lib/cordova-android.js"></sc' + 'ript>');
+          var mobile_system = 'android';
+        } else {
+          var mobile_system = '';
+          $("#fixed").prop('checked', true);
+          $("#endless").prop('disabled', true);          
+        }
+        
+        deviceMotion.init();
+        drawingApp.init(deviceMotion);
+    </script>
+	</body>
+</html>
