@@ -1,5 +1,13 @@
 "use strict";
 
+document.addEventListener('deviceready', onDeviceReady, false);
+
+ function onDeviceReady() { 
+        alert("ready");
+        screen.lockOrientation('portrait');
+        alert("portrait?");
+    }
+
 var drawingApp = (function () {
 
     var deviceMotion;
@@ -55,6 +63,7 @@ var drawingApp = (function () {
         }
     }
     
+      
     function addEventListeners() {
         
         $('#clearButton').click(function(e) {
@@ -148,7 +157,7 @@ var drawingApp = (function () {
         }
         context = canvas.getContext("2d"); 
         addEventListeners();
-        document.addEventListener('deviceready', this.redraw, false);
+        
     };
     
     return {
@@ -161,9 +170,17 @@ var deviceMotion = (function() {
     var betaNorm = 0;
     var gammaNorm = 0;    
     var normValuesSet = false;
+    var receivedFirstOrientationEvent = false;
         
     var init = function() {
         var handleOrientation = function(e) {            
+            if(!receivedFirstOrientationEvent) {                
+              $("#fixed").prop('checked', false);
+              $("#endless").prop('disabled', false);  
+              $("#endless").prop('checked', true); 
+              receivedFirstOrientationEvent = true;
+            }
+            
             var beta   = e.beta;
             var gamma  = e.gamma;
             

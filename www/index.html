@@ -64,10 +64,10 @@
         <div data-role="footer" data-position="fixed" data-tap-toggle="false">
             <div class="row center-xs">
             <fieldset data-role="controlgroup" data-type="horizontal">                
-                <input type="radio" name="canvas-mode" class="canvas-mode" id="endless" value="endless" checked="checked">
+                <input type="radio" name="canvas-mode" class="canvas-mode" id="endless" value="endless" disabled="disabled">
                 <label for="endless" class="ui-btn ui-mini nd2-btn-icon-block">Endless Canvas</label>
                 
-                <input type="radio" name="canvas-mode" class="canvas-mode" id="fixed" value="fixed" >
+                <input type="radio" name="canvas-mode" class="canvas-mode" id="fixed" value="fixed"  checked="checked">
                 <label for="fixed" class="ui-btn ui-mini nd2-btn-icon-block">Fixed canvas</label>
             </fieldset>
             </div>
@@ -82,22 +82,9 @@
 	<script src="vendor/chartist/chartist.min.js"></script>
 	<script src="js/nativedroid2.js"></script>
 	<script src="nd2settings.js"></script>
-	<script src="js/index.js"></script>
+	<script src="js/index.js"></script>    
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 	<script type="text/javascript">        
-       
-        var userAgent = navigator.userAgent + '';
-        if (userAgent.indexOf('iPhone') > -1) {
-          document.write('<script src="js/lib/cordova-iphone.js"></sc' + 'ript>');
-          var mobile_system = 'iphone';
-        } else if (userAgent.indexOf('Android') > -1) {
-          document.write('<script src="js/lib/cordova-android.js"></sc' + 'ript>');
-          var mobile_system = 'android';
-        } else {
-          var mobile_system = '';
-          $("#fixed").prop('checked', true);
-          $("#endless").prop('disabled', true);          
-        }
-        
         deviceMotion.init();
         drawingApp.init(deviceMotion);
     </script>
