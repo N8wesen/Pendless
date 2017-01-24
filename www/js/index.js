@@ -9,8 +9,6 @@ document.addEventListener('deviceready', onDeviceReady, false);
     }
 
 var drawingApp = (function () {
-
-    var deviceMotion;
     
     var canvas,
         context;
@@ -134,10 +132,7 @@ var drawingApp = (function () {
         window.addEventListener('moveCanvas', handleMovement, false);
     }
             
-    var init = function(devMot) {
-       
-        deviceMotion = devMot;
-        
+    var init = function() {               
         // Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
         canvas = document.createElement('canvas');
         
@@ -147,8 +142,7 @@ var drawingApp = (function () {
             canvas.setAttribute('height', ($(window).height() - 120));
         } else {
             canvas.setAttribute('height', (0.81* $(window).height()));
-        }
-        
+        }        
         
         canvas.setAttribute('id', 'canvas');
         document.getElementById('canvasDiv').appendChild(canvas);

@@ -84,9 +84,18 @@
 	<script src="nd2settings.js"></script>
 	<script src="js/index.js"></script>    
 	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-	<script type="text/javascript">        
+	<script type="text/javascript">
+        
+        var userAgent = navigator.userAgent + '';
+        var mobile_system = '';
+        if(userAgent.indexOf('iPhone') > -1) {
+            mobile_system = 'iphone';
+        } else if (userAgent.indexOf('Android') > -1) {
+            mobile_system = 'android';
+        }
+        
         deviceMotion.init();
-        drawingApp.init(deviceMotion);
+        drawingApp.init();
     </script>
 	</body>
 </html>
