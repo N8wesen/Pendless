@@ -55,8 +55,10 @@ var drawingApp = (function () {
         }
     }
     
-    function onDeviceReady() {        
+    function onDeviceReady() { 
+        alert("ready");
         screen.lockOrientation('portrait');
+        alert("portrait?");
         this.redraw();
     }
     
