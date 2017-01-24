@@ -157,8 +157,6 @@ var drawingApp = (function () {
 }());
 
 var deviceMotion = (function() {
-        
-    var count = 0;
     
     var betaNorm = 0;
     var gammaNorm = 0;    
@@ -187,14 +185,7 @@ var deviceMotion = (function() {
                 yOffset = 10;
             else if (beta > (betaNorm + 15))
                 yOffset = -10;
-            
-            if(count == 10)  {
-                //$('#debug').html(beta.toFixed(5) + " --- " + gamma.toFixed(5));
-                //$('#debug').html(betaNorm);
-                count = 0;
-            }           
-            count++;
-            
+                        
             var event = new CustomEvent('moveCanvas', 
                 {
                     detail: {

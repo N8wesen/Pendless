@@ -55,6 +55,11 @@ var drawingApp = (function () {
         }
     }
     
+    function onDeviceReady() {        
+        screen.lockOrientation('portrait');
+        this.redraw();
+    }
+    
     function addEventListeners() {
         
         $('#clearButton').click(function(e) {
@@ -148,7 +153,7 @@ var drawingApp = (function () {
         }
         context = canvas.getContext("2d"); 
         addEventListeners();
-        document.addEventListener('deviceready', this.redraw, false);
+        document.addEventListener('deviceready', this.onDeviceReady, false);
     };
     
     return {

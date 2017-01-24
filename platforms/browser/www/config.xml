@@ -10,8 +10,8 @@
     <description>
         Infinitely large drawing canvas that expands when you move your phone.
     </description>
-    <author email="milena.neumann@student.kit.edu">
-        Milena Neumann
+    <author email="updmg@student.kit.edu">
+        N8wesen
     </author>
     <content src="index.html" />
     <icon src="icon.png" />
