@@ -69,6 +69,10 @@ var drawingApp = (function () {
             redraw();
         });
         
+        $('#positionCalibrationButton').click(function(e) {
+            deviceMotion.clear();
+        });
+        
         var start = function(e){
             var mouseX = e.pageX - this.offsetLeft;
             var mouseY = e.pageY - this.offsetTop;
@@ -169,7 +173,10 @@ var deviceMotion = (function() {
         
         var handleOrientation = function(e) {  
 
-            if(!receivedFirstOrientationEvent) { 
+            if(!receivedFirstOrientationEvent && e.beta && e.gamma) { 
+                $("#keyTip").hide();
+                $('#canvas-mode-fieldset').show(); 
+                $('#positionCalibrationButton').show();                
                 $("#endless").prop('disabled', false);            
                 $("#endless").prop('checked', true); 
                 receivedFirstOrientationEvent = true;
@@ -208,8 +215,44 @@ var deviceMotion = (function() {
                 });
             window.dispatchEvent(event);        
         }
+        
+        var handleKeyDown = function(e) {
+            
+            var xOffset = 0;
+            var yOffset = 0;
+            
+            if (e.keyCode == '38') {
+                // up arrow
+                yOffset = 10;
+            }
+            else if (e.keyCode == '40') {
+                // down arrow
+                yOffset = -10;
+            }
+            else if (e.keyCode == '37') {
+               // left arrow
+               xOffset = 10;
+            }
+            else if (e.keyCode == '39') {
+               // right arrow
+               xOffset = -10;
+            }
+            
+            var event = new CustomEvent('moveCanvas', 
+                {
+                    detail: {
+                        xOffset: xOffset,
+                        yOffset: yOffset
+                    },
+                    bubbles: true,
+                    cancelable: true
+                });
+            window.dispatchEvent(event); 
+            
+        }
 
-        window.addEventListener("deviceorientation", handleOrientation, true);          
+        window.addEventListener("deviceorientation", handleOrientation, true);
+        document.onkeydown = handleKeyDown;
     };
     
     var clear = function() {
