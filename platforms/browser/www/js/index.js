@@ -2,15 +2,11 @@
 
 document.addEventListener('deviceready', onDeviceReady, false);
 
- function onDeviceReady() { 
-        alert("ready");
+ function onDeviceReady() {
         screen.lockOrientation('portrait');
-        alert("portrait?");
     }
 
 var drawingApp = (function () {
-
-    var deviceMotion;
     
     var canvas,
         context;
@@ -61,8 +57,7 @@ var drawingApp = (function () {
             context.closePath();
             context.stroke();
         }
-    }
-    
+    }    
       
     function addEventListeners() {
         
@@ -134,10 +129,7 @@ var drawingApp = (function () {
         window.addEventListener('moveCanvas', handleMovement, false);
     }
             
-    var init = function(devMot) {
-       
-        deviceMotion = devMot;
-        
+    var init = function() {               
         // Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
         canvas = document.createElement('canvas');
         
@@ -147,8 +139,7 @@ var drawingApp = (function () {
             canvas.setAttribute('height', ($(window).height() - 120));
         } else {
             canvas.setAttribute('height', (0.81* $(window).height()));
-        }
-        
+        }        
         
         canvas.setAttribute('id', 'canvas');
         document.getElementById('canvasDiv').appendChild(canvas);
@@ -170,17 +161,20 @@ var deviceMotion = (function() {
     var betaNorm = 0;
     var gammaNorm = 0;    
     var normValuesSet = false;
-    var receivedFirstOrientationEvent = false;
+    var receivedFirstOrientationEvent;
         
     var init = function() {
-        var handleOrientation = function(e) {            
-            if(!receivedFirstOrientationEvent) {                
-              $("#fixed").prop('checked', false);
-              $("#endless").prop('disabled', false);  
-              $("#endless").prop('checked', true); 
-              receivedFirstOrientationEvent = true;
+        
+        receivedFirstOrientationEvent = (mobile_system != '');        
+        
+        var handleOrientation = function(e) {  
+
+            if(!receivedFirstOrientationEvent) { 
+                $("#endless").prop('disabled', false);            
+                $("#endless").prop('checked', true); 
+                receivedFirstOrientationEvent = true;
             }
-            
+
             var beta   = e.beta;
             var gamma  = e.gamma;
             

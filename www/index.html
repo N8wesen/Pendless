@@ -45,7 +45,7 @@
 				</ul>
 
                 <ul data-role="listview" data-inset="false" data-icon="false">
-                    <li><input type="range" id="brushSize" min="1" max="20" value="5"></li>
+                    <li><input type="range" id="brushSize" min="1" max="42" value="5"></li>
                 </ul>		
 			</div>
                                 
@@ -64,10 +64,10 @@
         <div data-role="footer" data-position="fixed" data-tap-toggle="false">
             <div class="row center-xs">
             <fieldset data-role="controlgroup" data-type="horizontal">                
-                <input type="radio" name="canvas-mode" class="canvas-mode" id="endless" value="endless" disabled="disabled">
+                <input type="radio" name="canvas-mode" class="canvas-mode" id="endless" value="endless" checked="checked">
                 <label for="endless" class="ui-btn ui-mini nd2-btn-icon-block">Endless Canvas</label>
                 
-                <input type="radio" name="canvas-mode" class="canvas-mode" id="fixed" value="fixed"  checked="checked">
+                <input type="radio" name="canvas-mode" class="canvas-mode" id="fixed" value="fixed">
                 <label for="fixed" class="ui-btn ui-mini nd2-btn-icon-block">Fixed canvas</label>
             </fieldset>
             </div>
@@ -92,6 +92,9 @@
             mobile_system = 'iphone';
         } else if (userAgent.indexOf('Android') > -1) {
             mobile_system = 'android';
+        } else {
+            $("#fixed").prop('checked', true);
+            $("#endless").prop('disabled', true);   
         }
         
         deviceMotion.init();

@@ -2,10 +2,8 @@
 
 document.addEventListener('deviceready', onDeviceReady, false);
 
- function onDeviceReady() { 
-        alert("ready");
+ function onDeviceReady() {
         screen.lockOrientation('portrait');
-        alert("portrait?");
     }
 
 var drawingApp = (function () {
@@ -59,8 +57,7 @@ var drawingApp = (function () {
             context.closePath();
             context.stroke();
         }
-    }
-    
+    }    
       
     function addEventListeners() {
         
@@ -164,17 +161,20 @@ var deviceMotion = (function() {
     var betaNorm = 0;
     var gammaNorm = 0;    
     var normValuesSet = false;
-    var receivedFirstOrientationEvent = false;
+    var receivedFirstOrientationEvent;
         
     var init = function() {
-        var handleOrientation = function(e) {            
-            if(!receivedFirstOrientationEvent) {                
-              $("#fixed").prop('checked', false);
-              $("#endless").prop('disabled', false);  
-              $("#endless").prop('checked', true); 
-              receivedFirstOrientationEvent = true;
+        
+        receivedFirstOrientationEvent = (mobile_system != '');        
+        
+        var handleOrientation = function(e) {  
+
+            if(!receivedFirstOrientationEvent) { 
+                $("#endless").prop('disabled', false);            
+                $("#endless").prop('checked', true); 
+                receivedFirstOrientationEvent = true;
             }
-            
+
             var beta   = e.beta;
             var gamma  = e.gamma;
             
