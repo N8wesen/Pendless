@@ -111,7 +111,7 @@ var drawingApp = (function () {
         canvas.addEventListener("mouseout", end, false);
                        
         var handleMovement = function(e) {
-            if(!($('#endless').is(':checked')))
+            if(!($('#endless').is(':checked')) && mobile_system != '')
                 return;
             
             var xOffset = e.detail.xOffset;
@@ -203,7 +203,14 @@ var deviceMotion = (function() {
                 yOffset = 10;
             else if (beta > (betaNorm + 15))
                 yOffset = -10;
-                        
+            
+            if(yOffset == 0 && xOffset == 0) {
+                return;
+            } else if (yOffset != 0 && xOffset != 0) {
+                yOffset /= 2;
+                xOffset /= 2;
+            }
+            
             var event = new CustomEvent('moveCanvas', 
                 {
                     detail: {
@@ -236,6 +243,13 @@ var deviceMotion = (function() {
             else if (e.keyCode == '39') {
                // right arrow
                xOffset = -10;
+            }
+            
+            if(yOffset == 0 && xOffset == 0) {
+                return;
+            } else if (yOffset != 0 && xOffset != 0) {
+                yOffset /= 2;
+                xOffset /= 2;
             }
             
             var event = new CustomEvent('moveCanvas', 
